@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chismógrafo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .post-image {
+            max-width: 100%;
+            height: auto;
+        }
+        .like-button {
+            cursor: pointer;
+        }
+        .comment {
+            border-left: 3px solid #007bff;
+            padding-left: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4 alert alert-success">Chismógrafo</h1>
+        <h3 class="mb-5">Donde se pasa el tiempo libre</h3>
+        
+        <div class="mb-3">
+            <label for="sortOrder" class="form-label">Ordenar por fecha:</label>
+            <select id="sortOrder" class="form-select">
+                <option value="desc">Más reciente primero</option>
+                <option value="asc">Más antiguo primero</option>
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="userFilter" class="form-label">Filtrar por usuario:</label>
+            <input type="text" id="userFilter" class="form-control" placeholder="Escribe el nombre de usuario">
+        </div>
+        
+        <div id="posts-container"></div>
+    </div>
+
+    <script>
+        let posts = [];
+
+        async function fetchPosts() {
+            try {
+                const response = await fetch('https://ferqueve.github.io/ej30-09/api/posts.json');
+                const data = await response.json();
+                posts = data.posts;
+                renderPosts();
+            } catch (error) {
+                console.error('Error al obtener los posts:', error);
+            }
+        }
+
+        function renderPosts() {
+            const container = document.getElementById('posts-container');
+            container.innerHTML = '';
+
+            const sortOrder = document.getElementById('sortOrder').value;
+            const userFilter = document.getElementById('userFilter').value.toLowerCase();
+
+            const sortedPosts = [...posts].sort((a, b) => { 
+                const dateA = new Date(a.fecha + 'T' + a.hora);
+                const dateB = new Date(b.fecha + 'T' + b.hora);
+                return sortOrder === 'desc' ? dateB - dateA : dateA - dateB; //This is Operador Ternario Beibi
+            });
+
+            const filteredPosts = sortedPosts.filter(post => 
+                post.usuario.toLowerCase().includes(userFilter)
+            );
+
+            filteredPosts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'card mb-4';
+                postElement.innerHTML = `
+                    <div class="card-body">
+                        <h5 class="card-title">${post.usuario}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${post.fecha} ${post.hora}</h6>
+                        <img src="${post.imagen}" alt="Post image" class="post-image mb-2">
+                        <p class="card-text">
+                            <span class="like-button" onclick="toggleLike(this, ${post.likes})">
+                                <i class="fas fa-heart text-danger"></i> <span class="likes-count">${post.likes}</span>
+                            </span>
+                        </p>
+                        <h6>Comentarios:</h6>
+                        <div class="comments-container">
+                            ${post.comentarios.map(comment => `
+                                <div class="comment">
+                                    <strong>${comment.usuario}</strong> (${comment.fecha} ${comment.hora})<br>
+                                    ${comment.texto}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(postElement);
+            });
+        }
+
+        function toggleLike(element, likes) {
+            const likesCount = element.querySelector('.likes-count');
+            let currentLikes = parseInt(likesCount.textContent);
+            currentLikes = currentLikes > 0 ? currentLikes - 1 : 0;
+            likesCount.textContent = currentLikes;
+        }
+
+        document.getElementById('sortOrder').addEventListener('change', renderPosts);
+        document.getElementById('userFilter').addEventListener('input', renderPosts);
+
+        fetchPosts();
+    </script>
+</body>
+</html>

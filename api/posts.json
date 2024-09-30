@@ -1,0 +1,109 @@
+{
+  "posts": [
+    {
+      "usuario": "maria_garcia",
+      "fecha": "2024-09-30",
+      "hora": "14:30:00",
+      "likes": 42,
+      "imagen": "img/1.png",
+      "comentarios": [
+        {
+          "usuario": "pedro_lopez",
+          "texto": "¡Qué foto tan genial!",
+          "fecha": "2024-09-30",
+          "hora": "14:35:00"
+        },
+        {
+          "usuario": "laura_martinez",
+          "texto": "Me encanta el lugar, ¿dónde es?",
+          "fecha": "2024-09-30",
+          "hora": "14:40:00"
+        }
+      ]
+    },
+    {
+      "usuario": "juan_perez",
+      "fecha": "2024-09-30",
+      "hora": "15:15:00",
+      "likes": 28,
+      "imagen": "img/2.png",
+      "comentarios": [
+        {
+          "usuario": "ana_gomez",
+          "texto": "Increíble vista, Juan",
+          "fecha": "2024-09-30",
+          "hora": "15:20:00"
+        },
+        {
+          "usuario": "carlos_ruiz",
+          "texto": "¿Cuándo fue esto?",
+          "fecha": "2024-09-30",
+          "hora": "15:25:00"
+        },
+        {
+          "usuario": "sofia_hernandez",
+          "texto": "Me gustaría visitar ese lugar algún día",
+          "fecha": "2024-09-30",
+          "hora": "15:30:00"
+        }
+      ]
+    },
+    {
+      "usuario": "ana_rodriguez",
+      "fecha": "2024-09-30",
+      "hora": "16:00:00",
+      "likes": 55,
+      "imagen": "img/3.png",
+      "comentarios": [
+        {
+          "usuario": "diego_sanchez",
+          "texto": "¡Qué divertido se ve eso!",
+          "fecha": "2024-09-30",
+          "hora": "16:05:00"
+        },
+        {
+          "usuario": "elena_torres",
+          "texto": "Me alegro de que lo estés pasando bien",
+          "fecha": "2024-09-30",
+          "hora": "16:10:00"
+        }
+      ]
+    },
+    {
+      "usuario": "carlos_martinez",
+      "fecha": "2024-09-30",
+      "hora": "16:45:00",
+      "likes": 37,
+      "imagen": "img/4.png",
+      "comentarios": [
+        {
+          "usuario": "lucia_fernandez",
+          "texto": "Esa comida se ve deliciosa",
+          "fecha": "2024-09-30",
+          "hora": "16:50:00"
+        },
+        {
+          "usuario": "javier_navarro",
+          "texto": "¿Cuál es el nombre del restaurante?",
+          "fecha": "2024-09-30",
+          "hora": "16:55:00"
+        }
+      ]
+    },
+    {
+      "usuario": "laura_sanchez",
+      "fecha": "2024-09-30",
+      "hora": "17:30:00",
+      "likes": 61,
+      "imagen": "img/5.png",
+      "comentarios": [
+        {
+          "usuario": "mario_alvarez",
+          "texto": "Impresionante paisaje, Laura",
+          "fecha": "2024-09-30",
+          "hora": "17:35:00"
+        }
+      ]
+    }
+  ]
+}
